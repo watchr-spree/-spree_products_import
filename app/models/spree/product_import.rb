@@ -21,7 +21,7 @@ class Spree::ProductImport < ActiveRecord::Base
   has_attached_file :products_csv
 
   # validations
-  validates_attachment :variants_csv, :products_csv, content_type: { content_type: ["text/csv"] }
+  validates_attachment :variants_csv, :products_csv, content_type: { content_type: ["text/csv", "text/plain"] }
 
   validates :variants_csv, presence: true, unless: -> { products_csv.present? }
   validates :products_csv, presence: true, unless: -> { variants_csv.present? }
@@ -170,7 +170,6 @@ class Spree::ProductImport < ActiveRecord::Base
   end
 
   def add_images(model_obj, image_dir)
-    debugger
     return unless image_dir
     load_images(image_dir).each do |image_file|
       model_obj.images << Spree::Image.create(attachment: File.new("#{ image_dir }/#{ image_file }", 'r'))

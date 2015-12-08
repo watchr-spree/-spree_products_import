@@ -6,6 +6,7 @@
 .project
 .sass-cache
 coverage
+.byebug_history
 Gemfile.lock
 tmp
 nbproject

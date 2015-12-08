@@ -15,6 +15,7 @@ module SpreeProductsImport
       end
 
       def add_migrations
+        run 'rails generate delayed_job:active_record'
         run 'bundle exec rake railties:install:migrations FROM=spree_products_import'
       end
 
